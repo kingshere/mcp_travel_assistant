@@ -4,7 +4,7 @@ A high-performance **Model Context Protocol (MCP)** server that bridges the gap 
 
 Designed for **Agentic Workflows**, this server enables LLMs to perform real-time, deterministic travel optimization by unifying Google Travel Services with Amadeus Professional Systems.
 
-
+---
 
 ## 🚀 Key Technical Features
 
@@ -17,26 +17,34 @@ Designed for **Agentic Workflows**, this server enables LLMs to perform real-tim
 * **Transport Agnostic:** Supports **Stdio** for local AI communication and **SSE/HTTP** for distributed deployments.
 * **Utility Layer:** Integrated geocoding (Nominatim), weather intelligence (Open-Meteo), and live currency conversion for end-to-end trip planning.
 
+---
+
 ## 🏗️ Architecture & Design
+
+![MCP Travel System Architecture](mcp_travel_system_architecture.svg)
+
 * **Concurrency Control:** Engineered for concurrent request handling to reduce latency during multi-provider comparisons.
 * **Stateful Lifespan Management:** Implements FastAPI-style lifespan handlers for secure environment variable validation and resource cleanup.
 * **Rate Limiting:** Built-in protection for external API dependencies to ensure system stability under high-frequency agent tool calls.
 
+---
+
 ## 🔧 MCP Integration (Claude/Cursor)
-Add the following to your MCP configuration file:
+
+Add the following to your MCP configuration file (e.g., `claude_desktop_config.json`):
+
+```json
 {
   "mcpServers": {
     "travel-concierge": {
       "command": "python",
       "args": ["/absolute/path/to/travel_server.py"],
       "env": {
-        "SERPAPI_KEY": "...",
-        "AMADEUS_API_KEY": "...",
-        "AMADEUS_API_SECRET": "..."
+        "SERPAPI_KEY": "your_serpapi_key",
+        "AMADEUS_API_KEY": "your_amadeus_key",
+        "AMADEUS_API_SECRET": "your_amadeus_secret",
+        "EXCHANGE_RATE_API_KEY": "your_exchange_rate_key"
       }
     }
   }
 }
-AMADEUS_API_KEY=your_amadeus_key
-AMADEUS_API_SECRET=your_amadeus_secret
-EXCHANGE_RATE_API_KEY=your_exchange_rate_key
